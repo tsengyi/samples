@@ -2,7 +2,4 @@ language: java
 jdk:
   - oraclejdk8
 
-
-before_script: ls -l
-
 before_install: cd springbootsample
