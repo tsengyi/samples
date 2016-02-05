@@ -14,7 +14,8 @@ before_install:
 
 deploy:
   provider: releases
-  api_key: 3119c754dd5f6826240b0172379ee36c9b1f2b78
+  api_key:
+    secure: egQoYEHmApT64j6cEBjStXN2xIMMpbm/3DZG/8xTTiDvObHExdBHxFx2xskbVdzJL/dP+fXPw0DcqCA/Oif4i+9jk2NLeUrAfxloLBQ3c1LDqaChGAjalKjweLOtdUIkhjwLnRi27rpd8JnxL18wm9j1nnwLSNv24ycPPqY+uGu22zEq7eU75lzaPSTUb4FDuVAPdJxTeQwo5CxycA87ky+C8cFI04o2nJ86YlExjExT2661tAQyYqUeje4hskrItkfwN36cC5TZxTLuReG2kCTkAjEKojeA2CgvLOdGF2E+3XM/8fQGxCyzMFpEwCSun/TaQKW9WGRJfjpCWVTh82QYbxdBwsW2p++a6a6UA7w+aGGSV/lAHXji2tFPWuXyXG7d4fRCVVprvujK8EbexRXw7Fvoe7WdPdw8s8SaydD1aPFX9UYNkMBcmsqERVCF1Pbt9DmHf+TqpberPTZGV3Gzrl+n2If/jis85oIkKiJcMEBUEAqrz5bW2VRqdRVmI8jxTW1L15pKyUmk4b1GjL3v4ZHu+TcAzaa91qU8/jmicwDFlZ6x03HASaUes930IBLA+uPstkS+pqxZ11pXYI2GUJZR9bx1iPsOSAboOCg7V7O96IEZG/I2Ic35bV8qE6Wh8c/gAm/fuv0/R6PCMaDCPnpECTPPgcTDTP57tKQ=
   file: build/libs/springbootsample-1.0-SNAPSHOT.war
   skip_cleanup: true
   on:
