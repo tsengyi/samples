@@ -1,6 +1,11 @@
-before_script: springbootsample
 language: java
 jdk:
-  - oraclejdk7
-  - openjdk7
-  - openjdk6
+  - oraclejdk8
+
+env:
+  global:
+    - REPO="user/repo"
+    - CI_HOME=`pwd`/$REPO
+
+script: ci_build.sh
+
