@@ -3,6 +3,6 @@ jdk:
   - oraclejdk8
 
 
-before_script: cd springbootsample
+before_script: ls -l cd springbootsample
 
 before_install: cd springbootsample
