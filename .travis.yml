@@ -4,10 +4,11 @@ jdk:
 
 cache:
   directories:
-    ~/.gradle/wrapper
-    ~/.gradle/caches
+    - ~/.gradle/wrapper
+    - ~/.gradle/caches
 
 before_install:
-  cd springbootsample
+  - cd springbootsample
+  - chmod +x gradlew
 
 
