@@ -12,3 +12,10 @@ before_install:
   - chmod +x gradlew
 
 
+deploy:
+  provider: releases
+  api_key: 3119c754dd5f6826240b0172379ee36c9b1f2b78
+  file: build/libs/springbootsample-1.0-SNAPSHOT.war
+  skip_cleanup: true
+  on:
+    tags: true
