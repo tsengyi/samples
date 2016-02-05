@@ -1,3 +1,4 @@
+before_script: springbootsample
 language: java
 jdk:
   - oraclejdk7
