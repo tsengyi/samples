@@ -1,6 +1,6 @@
 package com.toncent.security;
 
-import com.toncent.MallApplication;
+import com.toncent.Application;
 import com.toncent.security.domain.Resource;
 import com.toncent.security.domain.Role;
 import com.toncent.security.domain.User;
@@ -23,7 +23,7 @@ import java.util.Set;
  * TIME  : 11:26
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(MallApplication.class)
+@SpringApplicationConfiguration(Application.class)
 public class SecurityRelateTests {
     @Autowired
     private UserRepository userRepository;
@@ -40,6 +40,9 @@ public class SecurityRelateTests {
         User user = new User();
         user.setUsername("username");
         user.setPassword("password");
+        user.setEmail("useranme@sample.com");
+        user.setMobile("13658445");
+        user.setAddress("address1");
 
         userRepository.save(user);
 
@@ -98,4 +101,19 @@ public class SecurityRelateTests {
 
     }
 
+    @Test
+    @Transactional
+    public void testDeleteUserByIds() {
+
+        Long[] ids = new Long[3];
+
+        for (int i = 0; i < 3; i++) {
+            User user = new User();
+            user.setUsername("test_name_" + i);
+            userRepository.save(user);
+            ids[i] = user.getId();
+        }
+
+        userRepository.deleteByIdIn(ids);
+    }
 }

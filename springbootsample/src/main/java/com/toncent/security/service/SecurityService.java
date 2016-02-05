@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
  * TIME  : 11:29
  */
 @Service
-public class ApplicationUserDetailsService implements UserDetailsService {
+public class SecurityService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -27,9 +27,32 @@ public class ApplicationUserDetailsService implements UserDetailsService {
     }
 
 
+    public Iterable<User> listUsers() {
+        Iterable<User> users = userRepository.findAll();
+        return users;
+    }
+
     public Iterable<Role> listRoles() {
         Iterable<Role> roles = roleRepository.findAll();
         return roles;
     }
 
+    public void saveUser(User user) {
+        userRepository.save(user);
+    }
+
+    public User findUserById(Long userId) {
+        return userRepository.findOne(userId);
+    }
+
+    public void deleteUserById(Long userId) {
+        userRepository.delete(userId);
+    }
+
+    public void deleteUserByIds(Long[] ids) {
+        for (int i = 0; ids != null && i < ids.length; i++) {
+            Long id = ids[i];
+            deleteUserById(id);
+        }
+    }
 }

@@ -45,6 +45,15 @@ public class User implements UserDetails {
     @Column
     private boolean enabled;
 
+    @Column
+    private String email;
+
+    @Column
+    private String mobile;
+
+    @Column
+    private String address;
+
 
     public Long getId() {
         return id;
@@ -133,6 +142,29 @@ public class User implements UserDetails {
         this.enabled = enabled;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     @Override
     public boolean equals(Object o) {
