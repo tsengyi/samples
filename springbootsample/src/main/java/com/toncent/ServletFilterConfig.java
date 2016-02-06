@@ -1,15 +1,15 @@
 package com.toncent;
 
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * AUTHOR: 819521
  * DATE  : 2016/2/6
  * TIME  : 12:20
  */
-@Configurable
+@Configuration
 public class ServletFilterConfig {
 
     @Bean
@@ -19,4 +19,5 @@ public class ServletFilterConfig {
         filterRegistrationBean.addUrlPatterns("/*");
         return filterRegistrationBean;
     }
+
 }

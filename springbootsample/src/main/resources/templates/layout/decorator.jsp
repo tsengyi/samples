@@ -3,15 +3,9 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
     <title>Spring Boot Sample</title>
 
-    <meta name="description" content="spring boot, thymeleaf, bootstrap"/>
-    <meta name="author" content="tsengyi"/>
-    <link th:href="@{'/css/bootstrap.min.css'}" href="css/bootstrap.min.css" rel="stylesheet"/>
-    <link th:href="@{'/css/style.css'}" href="css/style.css" rel="stylesheet"/>
     <style>
         .table-striped>tbody>tr:nth-child(odd) {
         background-color: #eef;
@@ -20,46 +14,7 @@
         background-color: #ffe;
         }
     </style>
-
-    <script th:src="@{/js/jquery.min.js}" src="js/jquery.min.js"></script>
-    <script th:src="@{/js/bootstrap.min.js}" src="js/bootstrap.min.js"></script>
-    <script th:src="@{/js/scripts.min.js}" src="js/scripts.min.js"></script>
-
-    <script>
-        jQuery(document).ready(function () {
-            jQuery("button[name=deleteById]").click(function() {
-                var id = this.value;
-                jQuery.ajax({
-                    type : 'DELETE',
-                    url  : 'delete/' + id,
-                }).done(function( msg ) {
-                     alert(msg );
-                });
-            })
-
-             jQuery("#toggleCheck").click(function() {
-                jQuery("input[name=ids]").prop('checked', this.checked)
-            })
-
-            jQuery("#deleteChoose").click(function() {
-                var ids = jQuery('input[name=ids]:checked').map(function(i,n) {
-                    return jQuery(n).val();
-                }).get();
-                jQuery.ajax({
-                    type : 'POST',
-                    traditional : true,
-                    data : {ids : ids},
-                    url  : 'deletes',
-                }).done(function( msg ) {
-                     alert(msg );
-                });
-            })
-
-        });
-
-
-
-    </script>
+    <sitemesh:write property='head'/>
 </head>
 
 <body>
@@ -127,38 +82,48 @@
 
         </div>
         <div class="col-md-9">
-            <table class="table table-hover table-bordered table-striped">
-                <thead>
-                <tr>
-                    <th>账号</th>
-                    <th>昵称</th>
-                    <th>姓名</th>
-                    <th>邮件</th>
-                    <th>手机</th>
-                    <th>
+             <sitemesh:write property='body'/>
 
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="user : ${users}" class="found">
-                    <td th:text="${user.username}">zhangsan</td>
-                    <td th:text="${user.username}">小张</td>
-                    <td th:text="${user.username}">张三</td>
-                    <td th:text="${user.email}">zhangsan@sample.com</td>
-                    <td th:text="${user.mobile}">18888888888</td>
-                    <td>
-                        <a th:href="@{'/user/edit/'+${user.id}}">Edit</a>
-                        <button name="deleteById" th:value="${user.id}">删除</button>
-                    </td>
-                </tr>
-
-                </tbody>
-            </table>
         </div>
     </div>
 </div>
 
+<script th:src="@{/js/jquery.min.js}" src="js/jquery.min.js"></script>
+<script th:src="@{/js/bootstrap.min.js}" src="js/bootstrap.min.js"></script>
+<script th:src="@{/js/scripts.min.js}" src="js/scripts.min.js"></script>
+
+<script>
+        jQuery(document).ready(function () {
+            jQuery("button[name=deleteById]").click(function() {
+                var id = this.value;
+                jQuery.ajax({
+                    type : 'DELETE',
+                    url  : 'delete/' + id,
+                }).done(function( msg ) {
+                     alert(msg );
+                });
+            })
+
+             jQuery("#toggleCheck").click(function() {
+                jQuery("input[name=ids]").prop('checked', this.checked)
+            })
+
+            jQuery("#deleteChoose").click(function() {
+                var ids = jQuery('input[name=ids]:checked').map(function(i,n) {
+                    return jQuery(n).val();
+                }).get();
+                jQuery.ajax({
+                    type : 'POST',
+                    traditional : true,
+                    data : {ids : ids},
+                    url  : 'deletes',
+                }).done(function( msg ) {
+                     alert(msg );
+                });
+            })
+
+        });
+</script>
 </body>
 
 </html>
