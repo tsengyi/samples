@@ -3,9 +3,28 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>用户列表</title>
-    <script src="https://cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <title>Spring Boot Sample</title>
+
+    <meta name="description" content="spring boot, thymeleaf, bootstrap"/>
+    <meta name="author" content="tsengyi"/>
+    <link th:href="@{'/css/bootstrap.min.css'}" href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link th:href="@{'/css/style.css'}" href="css/style.css" rel="stylesheet"/>
+    <style>
+        .table-striped>tbody>tr:nth-child(odd) {
+        background-color: #eef;
+        }
+        .table-striped>tbody>tr:nth-child(even) {
+        background-color: #ffe;
+        }
+    </style>
+
+    <script th:src="@{/js/jquery.min.js}" src="js/jquery.min.js"></script>
+    <script th:src="@{/js/bootstrap.min.js}" src="js/bootstrap.min.js"></script>
+    <script th:src="@{/js/scripts.min.js}" src="js/scripts.min.js"></script>
+
     <script>
         jQuery(document).ready(function () {
             jQuery("button[name=deleteById]").click(function() {
@@ -45,37 +64,100 @@
 
 <body>
 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="navbar-header">
 
-<table>
-    <thead>
-    <tr>
-        <th><input type="checkbox" id="toggleCheck"/>全选</th>
-        <th>账号</th>
-        <th>昵称</th>
-        <th>姓名</th>
-        <th>邮件</th>
-        <th>手机</th>
-        <th>
-            <a th:href="@{'/user/add'}">新增</a>
-            <button id="deleteChoose">删除选中</button>
-        </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="user : ${users}">
-        <td><input type="checkbox" name="ids" th:value="${user.id}"/></td>
-        <td th:text="${user.username}">zhangsan</td>
-        <td th:text="${user.username}">小张</td>
-        <td th:text="${user.username}">张三</td>
-        <td th:text="${user.email}">zhangsan@sample.com</td>
-        <td th:text="${user.mobile}">18888888888</td>
-        <td>
-            <a th:href="@{'/user/edit/'+${user.id}}">Edit</a>
-            <button name="deleteById" th:value="${user.id}">删除</button>
-        </td>
-    </tr>
-    </tbody>
-</table>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
+                            class="icon-bar"></span><span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Brand</a>
+
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#">Link</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+            </nav>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="panel-group" id="panel-475052">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a class="panel-title" data-toggle="collapse" data-parent="#panel-475052"
+                           href="#panel-element-276232">安全管理</a>
+                    </div>
+                    <div id="panel-element-276232" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <ul>
+
+                                <li><a href="user/add" th:href="@{'/user/add'}">新增用户</a></li>
+                                <li><a href="user/list" th:href="@{'/user/list'}">列表用户</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a class="panel-title collapsed in" data-toggle="collapse" data-parent="#panel-475052"
+                           href="#panel-element-274689">系统管理</a>
+                    </div>
+                    <div id="panel-element-274689" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            此功能待发掘
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-9">
+            <table class="table table-hover table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>账号</th>
+                    <th>昵称</th>
+                    <th>姓名</th>
+                    <th>邮件</th>
+                    <th>手机</th>
+                    <th>
+
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user : ${users}" class="found">
+                    <td th:text="${user.username}">zhangsan</td>
+                    <td th:text="${user.username}">小张</td>
+                    <td th:text="${user.username}">张三</td>
+                    <td th:text="${user.email}">zhangsan@sample.com</td>
+                    <td th:text="${user.mobile}">18888888888</td>
+                    <td>
+                        <a th:href="@{'/user/edit/'+${user.id}}">Edit</a>
+                        <button name="deleteById" th:value="${user.id}">删除</button>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
 </body>
 
