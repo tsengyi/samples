@@ -1,29 +1,25 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="layout/decorator">
 
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>用户列表</title>
 
-    <title>Spring Boot Sample -- User List</title>
-
-    <meta name="description" content="spring boot, thymeleaf, bootstrap"/>
-    <meta name="author" content="tsengyi"/>
-    <link th:href="@{'/css/bootstrap.min.css'}" href="css/bootstrap.min.css" rel="stylesheet"/>
-    <link th:href="@{'/css/style.css'}" href="css/style.css" rel="stylesheet"/>
     <style>
-        .table-striped>tbody>tr:nth-child(odd) {
-        background-color: #eef;
+        .table-striped > tbody > tr:nth-child(odd) {
+            background-color: #eef;
         }
-        .table-striped>tbody>tr:nth-child(even) {
-        background-color: #ffe;
+
+        .table-striped > tbody > tr:nth-child(even) {
+            background-color: #ffe;
         }
     </style>
 </head>
 
 <body>
-<table class="table table-hover table-bordered table-striped">
+    
+
+<table class="table table-hover table-bordered table-striped" layout:fragment="content">
     <thead>
     <tr>
         <th>账号</th>
@@ -50,8 +46,40 @@
     </tr>
 
     </tbody>
-</table>
 
+</table>
+<script>
+    jQuery(document).ready(function () {
+        jQuery("button[name=deleteById]").click(function () {
+            var id = this.value;
+            jQuery.ajax({
+                type: 'DELETE',
+                url: 'delete/' + id,
+            }).done(function (msg) {
+                alert(msg);
+            });
+        })
+
+        jQuery("#toggleCheck").click(function () {
+            jQuery("input[name=ids]").prop('checked', this.checked)
+        })
+
+        jQuery("#deleteChoose").click(function () {
+            var ids = jQuery('input[name=ids]:checked').map(function (i, n) {
+                return jQuery(n).val();
+            }).get();
+            jQuery.ajax({
+                type: 'POST',
+                traditional: true,
+                data: {ids: ids},
+                url: 'deletes',
+            }).done(function (msg) {
+                alert(msg);
+            });
+        })
+
+    });
+</script>
 </body>
 
 </html>

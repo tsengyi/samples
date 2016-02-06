@@ -2,7 +2,6 @@ package com.toncent.security.config;
 
 import com.toncent.security.service.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.autoconfigure.ManagementServerProperties;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -20,8 +19,7 @@ import org.springframework.security.config.annotation.web.configurers.Expression
  */
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-//@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
-@Order(ManagementServerProperties.ACCESS_OVERRIDE_ORDER)
+@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
