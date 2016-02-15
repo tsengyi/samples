@@ -1,5 +1,7 @@
 package com.toncent.security.config;
 
+import com.toncent.security.domain.Resource;
+import com.toncent.security.domain.Role;
 import com.toncent.security.service.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
@@ -11,6 +13,10 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
+
+import javax.transaction.Transactional;
+import java.util.Iterator;
+import java.util.Set;
 
 /**
  * AUTHOR: 819521
@@ -31,19 +37,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry urlRegistry =
                 http.authorizeRequests().antMatchers("/").permitAll();
 
-//        Iterable<Role> roles = securityService.listRoles();
-//        for (Iterator<Role> iterator = roles.iterator(); iterator.hasNext(); ) {
-//            Role role = iterator.next();
-//
-//            Set<Resource> roleResources = role.getResources();
-//
-//            for (Iterator<Resource> resourceIterator = roleResources.iterator(); resourceIterator.hasNext(); ) {
-//                Resource resource = resourceIterator.next();
-//
-//                urlRegistry.antMatchers(resource.getUrl()).hasAnyAuthority(role.getAuthority());
-//            }
-//            urlRegistry.anyRequest().fullyAuthenticated();
-//        }
+        Iterable<Role> roles = securityService.listRoles();
+        for (Iterator<Role> iterator = roles.iterator(); iterator.hasNext(); ) {
+            Role role = iterator.next();
+
+            Set<Resource> roleResources = role.getResources();
+
+            for (Iterator<Resource> resourceIterator = roleResources.iterator(); resourceIterator.hasNext(); ) {
+                Resource resource = resourceIterator.next();
+
+                urlRegistry.antMatchers(resource.getUrl()).hasAuthority(role.getAuthority());
+            }
+        }
+        urlRegistry.anyRequest().fullyAuthenticated();
+
         urlRegistry
                 .and()
                 .formLogin()

@@ -27,7 +27,7 @@ public class Role implements GrantedAuthority {
     private Set<User> users = new HashSet<User>();
 
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "sec_role_resource", joinColumns = @JoinColumn(name = "role_id"),
             inverseJoinColumns = @JoinColumn(name = "resource_id"))
     private Set<Resource> resources = new HashSet<Resource>();
