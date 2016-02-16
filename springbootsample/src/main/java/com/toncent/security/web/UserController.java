@@ -17,7 +17,7 @@ import javax.validation.Valid;
  */
 
 @Controller
-@RequestMapping(value = "/user")
+@RequestMapping(value = {"/web/user", "/wx/user"})
 public class UserController {
 
     @Autowired
